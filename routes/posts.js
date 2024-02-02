@@ -1,6 +1,6 @@
 // Import necessary modules
 const express = require('express');
-const prisma = require('./db/index.js');
+const prisma = require('./db/index');
 const { checkIfAuthenticated } = require('./authMiddleware');
 
 //4.3.1

@@ -2,7 +2,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
-const prisma = require('./db/index.js');
+const prisma = require('./db/index');
 
 
     // 4.2.1
