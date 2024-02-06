@@ -1,9 +1,7 @@
 const express = require('express');
 const prisma = require('../db/index.js');
-const authMiddleware = require('./authMiddleware');
-const { checkIfAuthenticated } = require('../middleware/authMiddleware.js');
+const authMiddleware = require('../middleware/authMiddleware.js');
 const router = express.Router();
-const prisma = require("prisma");
 
 // 4.1.1
 router.get('/', async (req, res) => {

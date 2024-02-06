@@ -1,7 +1,7 @@
 // Import necessary modules
 const express = require('express');
-const prisma = require('./db/index');
-const { checkIfAuthenticated } = require('./authMiddleware');
+const prisma = require('../db/index.js');
+const {checkIfAuthenticated} = require('../middleware/authMiddleware.js');
 
 //4.3.1
 const router = express.Router();

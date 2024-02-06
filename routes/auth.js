@@ -2,8 +2,8 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
-const prisma = require('./db/index');
-
+const prisma = require('../db/index');
+const passport = require('passport');
 
     // 4.2.1
     const router = express.Router();
