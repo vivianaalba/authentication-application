@@ -5,6 +5,15 @@ const bodyParser = require("body-parser");
 const MongoClient = require('mongodb').MongoClient;
 const passport = require("passport");
 
+// added static routes
+const staticRoutes = require("./routes/static");
+const postsRoutes = require("./routes/posts");
+const authRoutes = require("./routes/auth");
+
+// Kevinn codes
+// const authRoutes = require("./routes/auth");
+// const postsRoutes = require("./routes/posts");
+// const staticRoutes = require("./routes/static");
 
 dotenv.config();
 

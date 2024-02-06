@@ -1,15 +1,14 @@
 const express = require('express');
-const prisma = require('./db/index');
+const prisma = require('../db/index.js');
 const authMiddleware = require('./authMiddleware');
-const { checkIfAuthenticated } = require('../middleware/authMiddleware');
-checkIfAuthenticated
+const { checkIfAuthenticated } = require('../middleware/authMiddleware.js');
 const router = express.Router();
 
 // 4.1.1
 router.get('/', async (req, res) => {
     try {
         // Render the index.ejs file
-        res.render('index.ejs');
+        res.render('index.ejs', null);
     } catch (error) {
         // Handle errors
         console.error('Error rendering index:', error);
@@ -21,7 +20,7 @@ router.get('/', async (req, res) => {
 router.get('/login', async (req, res) => {
     try {
         // Render the login.ejs file
-        res.render('login.ejs');
+        res.render('login.ejs', null);
     } catch (error) {
         // Handle errors
         console.error('Error rendering login:', error);
@@ -68,7 +67,7 @@ router.get('/dashboard', authMiddleware.checkIfAuthenticated, async(req, res) =>
 router.get('/create-post', authMiddleware.checkIfAuthenticated, async (req, res) => {
     try {
         // Render the create-post.ejs file
-        res.render('create-post');
+        res.render('create-post', null);
     } catch (error) {
         // Handle errors
         console.error('Error rendering create-post:', error);
@@ -77,4 +76,4 @@ router.get('/create-post', authMiddleware.checkIfAuthenticated, async (req, res)
 });
 
 // Export the router
-module.exports = router;
+module.exports = {router};
