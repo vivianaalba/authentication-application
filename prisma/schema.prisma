@@ -22,9 +22,9 @@ model Post {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   title     String
   content   String
-// When using another id from another model with Mongodb,
-// make sure the field is using the objectId property,
-// along with the String type
+    // When using another id from another model with Mongodb,
+    // make sure the field is using the objectId property,
+    // along with the String type
 	userId    String @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

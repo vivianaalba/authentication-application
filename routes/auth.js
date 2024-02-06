@@ -4,12 +4,13 @@ const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const prisma = require('../db/index');
 const passport = require('passport');
+const authMiddleware = require('../middleware/authMiddleware.js');
 
-    // 4.2.1
-    const router = express.Router();
+// 4.2.1
+const router = express.Router();
 
-    // 4.2.2
-    router.post("/register", async (req, res) => {
+ // 4.2.2
+ router.post("/register", async (req, res) => {
         try {
             // Deconstruct email and password variables stored at req.body
             const { email, password } = req.body;
@@ -42,20 +43,21 @@ const passport = require('passport');
             });
         } 
         
-        catch (error) {
+     catch (error) {
             console.error('Error registering user:', error);
             res.status(500).json({ error: "Internal Server Error" });
         }
     });
 
-    // Route for user login
-    router.post("/login", passport.authenticate('local', {
+
+ // Route for user login
+router.post("/login", passport.authenticate('local', {
         successRedirect: "/dashboard",
         failureRedirect: "/login",
-    }));
+ }));
 
-    // Route for user logout
-    // req.logout will destroy the session that passport created
+// Route for user logout
+// req.logout will destroy the session that passport created
     router.post("/logout", function (req, res, next) {
         req.logout(function (err) {
             if (err) {
@@ -63,6 +65,7 @@ const passport = require('passport');
             }
             res.redirect("/login");
         });
-    });
+});
 
-    return router;
+// Export the router
+module.exports = router;

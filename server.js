@@ -1,24 +1,24 @@
 // test to confirm that server is running
 console.log('Is this thing on?');
 
+// import modules and dependencies
 const express = require("express");
 const dotenv = require("dotenv");
 const session = require("express-session");
 const bodyParser = require("body-parser");
-const MongoClient = require('mongodb').MongoClient;
 const passport = require("passport");
-const prisma = require("prisma");
+const authMiddleware = require('./middleware/authMiddleware.js');
 
+// define port
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-// added static routes
+// import routes
 const staticRoutes = require("./routes/static");
 const postsRoutes = require("./routes/posts");
 const authRoutes = require("./routes/auth");
 
 dotenv.config();
-
-const app = express();
-const PORT = process.env.PORT || 3000;
 
 const { setupPassportLocal } = require("./middleware/authMiddleware");
 
@@ -58,9 +58,9 @@ app.use(passport.session());
 // "/auth" redirects to the authentication routes
 // "/posts" redirects to the post methods
 // <https://expressjs.com/en/4x/api.html#app.use> in the callback section for more information
-// app.use("/");
-// app.use("/auth", authRoutes(passport));
-// app.use("/posts");
+app.use("/", staticRoutes);
+//app.use("/auth", authRoutes(authMiddleware.passport));
+//app.use("/posts", postsRoutes);
 
 // Start the server
 app.listen(PORT, () => {
