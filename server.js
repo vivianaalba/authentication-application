@@ -1,9 +1,14 @@
+// test to confirm that server is running
+console.log('Is this thing on?');
+
 const express = require("express");
 const dotenv = require("dotenv");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const MongoClient = require('mongodb').MongoClient;
 const passport = require("passport");
+const prisma = require("prisma");
+
 
 // added static routes
 const staticRoutes = require("./routes/static");

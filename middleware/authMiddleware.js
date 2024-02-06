@@ -1,5 +1,5 @@
 const passportLocal = require('passport-local');
-const localStrategy = passportLocal.Strategy
+const localStrategy = passportLocal.Strategy;
 const bcrypt = require('bcrypt');
 const prisma = require('prisma');
 
