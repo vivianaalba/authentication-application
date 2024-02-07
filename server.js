@@ -7,7 +7,7 @@ const dotenv = require("dotenv");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-const authMiddleware = require('./middleware/authMiddleware.js');
+const authMiddleware = require('./middleware/authMiddleware');
 
 // define port
 const app = express();
@@ -59,8 +59,8 @@ app.use(passport.session());
 // "/posts" redirects to the post methods
 // <https://expressjs.com/en/4x/api.html#app.use> in the callback section for more information
 app.use("/", staticRoutes);
-//app.use("/auth", authRoutes(authMiddleware.passport));
-//app.use("/posts", postsRoutes);
+app.use("/auth", authRoutes(passport));
+app.use("/posts", postsRoutes);
 
 // Start the server
 app.listen(PORT, () => {

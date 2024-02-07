@@ -1,29 +1,29 @@
 const express = require('express');
-const prisma = require('../db/index.js');
-const authMiddleware = require('../middleware/authMiddleware.js');
+const prisma = require('../db/index');
+const {checkIfAuthenticated} = require('../middleware/authMiddleware');
 const router = express.Router();
 
 // 4.1.1
 router.get('/', async (req, res) => {
      // Render the index.ejs file
-    res.render('index');
+    res.render('index.ejs', null);
 });
 
 //4.1.2
 router.get('/login', async (req, res) => {
     // Render the login.ejs file
-    res.render('login');
+    res.render("login.ejs", null);
 
 });
 
 //4.1.3
 router.get('/signup', async (req, res) => {
     // Render the signup file
-    res.render('signup');
+    res.render("signup.ejs", null);
 });
 
 //4.1.4
-router.get('/dashboard', authMiddleware.checkIfAuthenticated, async(req, res) => {
+router.get('/dashboard', checkIfAuthenticated, async(req, res) => {
     // Use the userId from Passport
   const userId = req.user.id;
 
@@ -46,7 +46,7 @@ router.get('/dashboard', authMiddleware.checkIfAuthenticated, async(req, res) =>
 });
 
 //4.1.5
-router.get('/create-post', authMiddleware.checkIfAuthenticated, async (req, res) => {
+router.get('/create-post', checkIfAuthenticated, async (req, res) => {
     // render create-post file
     res.render('create-post');
 });
