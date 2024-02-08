@@ -1,7 +1,7 @@
 const passportLocal = require('passport-local');
 const localStrategy = passportLocal.Strategy;
 const bcrypt = require('bcrypt');
-const prisma = require('prisma');
+const prisma = require('../db/index');
 
 function setupPassportLocal(passport) {
     passport.use(

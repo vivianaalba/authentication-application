@@ -60,7 +60,7 @@ app.use(passport.session());
 // <https://expressjs.com/en/4x/api.html#app.use> in the callback section for more information
 app.use("/", staticRoutes);
 app.use("/auth", authRoutes(passport));
-app.use("/posts", postsRoutes);
+//app.use("/posts", postsRoutes);
 
 // Start the server
 app.listen(PORT, () => {

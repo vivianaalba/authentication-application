@@ -13,10 +13,11 @@ const router = express.Router();
 
 // 4.2.2
 router.post("/register", async (req, res) => {
-       try {
-           // Deconstruct email and password variables stored at req.body
-           const { email, password } = req.body;
 
+    // Deconstruct email and password variables stored at req.body
+    const { email, password } = req.body; 
+    
+    try {
            // Generate userId without dashes (-) with a length of 12 characters
            const userId = uuidv4().replace(/-/g, "").slice(0, 24);
 
@@ -51,23 +52,30 @@ router.post("/register", async (req, res) => {
        }
    });
 
-
-// Route for user login
-router.post("/login", passport.authenticate('local', {
-       successRedirect: "/dashboard",
-       failureRedirect: "/login",
-}));
-
-// Route for user logout
-// req.logout will destroy the session that passport created
-   router.post("/logout", function (req, res, next) {
-       req.logout(function (err) {
-           if (err) {
-               return next(err);
-           }
-           res.redirect("/login");
-       });
+   passport.authenticate('local', (user) => {
+    if (!user) {
+        // Authentication failed, redirect or handle accordingly
+        return res.status(401).json({ message: 'Authentication failed' });
+    }
 });
 
-return {router};
+
+    // Route for user login
+    router.post("/login", passport.authenticate('local', {
+        successRedirect: "/dashboard",
+        failureRedirect: "/login",
+    }));
+
+    // Route for user logout
+    // req.logout will destroy the session that passport created
+    router.post("/logout", function (req, res, next) {
+        req.logout(function (err) {
+            if (err) {
+                return next(err);
+            }
+            res.redirect("/login");
+        });
+    });
+
+    return router;
 };
